@@ -1,0 +1,137 @@
+! -------------------------------------------------------------------------------
+! CORE UI IMPROVEMENTS
+! -------------------------------------------------------------------------------
+
+! Removes the side navigation drawer (App Drawer)
+www.youtube.com##.tp-yt-app-drawer.style-scope
+
+! Optimizes the grid layout by removing unnecessary empty spacing
+www.youtube.com##ytd-rich-grid-row,#contents.ytd-rich-grid-row:style(display: contents !important)
+
+! -------------------------------------------------------------------------------
+! SHORTS FILTERING - DESKTOP VERSION (NOT on channel pages)
+! -------------------------------------------------------------------------------
+
+! === Filter Shorts by title hashtag (EXCEPT on channel pages) ===
+! Hides videos that contain "#Shorts" in the title
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytd-grid-video-renderer:has(#video-title:has-text(/(^| )#Shorts?( |$)/i))
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytd-rich-item-renderer:has(#video-title:has-text(/(^| )#Shorts?( |$)/i))
+
+! === Filter Shorts by thumbnail indicator (EXCEPT on channel pages) ===
+! Hides videos that show the Shorts icon on the thumbnail
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytd-grid-video-renderer:has([overlay-style="SHORTS"])
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytd-rich-item-renderer:has([overlay-style="SHORTS"])
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytd-video-renderer:has([overlay-style="SHORTS"])
+
+! === New working Shorts filters for search results ===
+! Hides Shorts shelves and Shorts results on the search page using the newer YouTube markup
+www.youtube.com##ytd-search ytd-reel-shelf-renderer
+www.youtube.com##ytd-search grid-shelf-view-model:has(.shortsLockupViewModelHost)
+www.youtube.com##ytd-search ytd-video-renderer:has(badge-shape[aria-label="Shorts"])
+www.youtube.com##ytd-search ytd-video-renderer:has(a[href^="/shorts/"])
+
+! Special handling for the subscriptions page (kept unchanged)
+www.youtube.com##ytd-item-section-renderer.ytd-section-list-renderer[page-subtype="subscriptions"]:has(ytd-video-renderer:has([overlay-style="SHORTS"]))
+
+! === Navigation & Sidebar ===
+! Removes the Shorts button from the sidebar
+www.youtube.com##ytd-guide-entry-renderer:has(yt-formatted-string:has-text(/^Shorts$/i))
+! Working alternative for the current markup
+www.youtube.com##a#endpoint.yt-simple-endpoint.style-scope.ytd-guide-entry-renderer[title="Shorts"]
+! Adds support for tablet layouts
+www.youtube.com##ytd-mini-guide-entry-renderer:has(.title:has-text(/^Shorts$/i))
+
+! === Shorts sections across different pages (EXCEPT on channel pages and history) ===
+! Hides Shorts sections everywhere except channel pages and watch history
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@|feed\/history)).*$/)ytd-rich-section-renderer:has(#title:has-text(/(^| )Shorts( |$)/i))
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@|feed\/history)).*$/)ytd-reel-shelf-renderer:has(.ytd-reel-shelf-renderer:has-text(/(^| )Shorts( |$)/i))
+
+! === Channel pages ===
+! REMOVED: The Shorts tab is NO LONGER hidden so it remains accessible
+! The following lines are intentionally commented out:
+! www.youtube.com##tp-yt-paper-tab:has(.tp-yt-paper-tab:has-text(Shorts))
+! www.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
+
+! === Video details & recommendations (EXCEPT on channel pages) ===
+! Removes Shorts remixes from video descriptions and comment recommendations
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytd-reel-shelf-renderer:has(#title:has-text(/(^| )Shorts.?Remix.*$/i))
+
+! === Search & homepage categories ===
+! Hides Shorts category chips on the homepage and search pages
+www.youtube.com##yt-chip-cloud-chip-renderer:has(yt-formatted-string:has-text(/^Shorts$/i))
+
+! Hides Shorts sections on the search page
+www.youtube.com##.shelf-header-layout-wiz__title:has-text(/(^| )Shorts( |$)/i):upward(grid-shelf-view-model)
+www.youtube.com##.yt-shelf-header-layout__title:has-text(/(^| )Shorts( |$)/i):upward(grid-shelf-view-model)
+
+! -------------------------------------------------------------------------------
+! SHORTS FILTERING - MOBILE VERSION (m.youtube.com) - NOT on channel pages
+! -------------------------------------------------------------------------------
+
+! === Mobile homepage (EXCEPT on channel pages) ===
+! Hides videos with the "#shorts" hashtag in the title (home feed)
+m.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytm-rich-item-renderer:has(#video-title:has-text(/(^| )#Shorts?( |$)/i))
+
+! === Mobile subscriptions (EXCEPT on channel pages) ===
+! Hides videos with the "#shorts" hashtag in the title (subscriptions feed)
+m.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytm-item-section-renderer:has(#video-title:has-text(/(^| )#Shorts?( |$)/i))
+
+! === Mobile navigation ===
+! Removes the Shorts button from the bottom navigation bar
+m.youtube.com##ytm-pivot-bar-item-renderer:has(.pivot-shorts)
+
+! === Mobile thumbnail filtering (EXCEPT on channel pages) ===
+! Hides videos with a Shorts indicator on the thumbnail
+m.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytm-video-with-context-renderer:has([data-style="SHORTS"])
+
+! === Mobile Shorts sections (EXCEPT on channel pages and history) ===
+! Hides Shorts sections except on channel pages and watch history
+m.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@|feed\/history)).*$/)ytm-rich-section-renderer:has(.yt-core-attributed-string:has-text(/(^| )Shorts( |$)/i))
+m.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@|feed\/history)).*$/)ytm-reel-shelf-renderer.item:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/(^| )Shorts( |$)/i))
+
+! === Mobile channel pages ===
+! REMOVED: The Shorts tab is NO LONGER hidden
+! The following lines are intentionally commented out:
+! m.youtube.com##.single-column-browse-results-tabs>a:has-text(Shorts)
+! m.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
+
+! === Mobile video details (EXCEPT on channel pages) ===
+! Removes Shorts remixes from video descriptions and player recommendations
+m.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)ytm-reel-shelf-renderer:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/(^| )Shorts.?Remix.*$/i))
+
+! === Mobile search & homepage categories ===
+! Hides Shorts category chips on the mobile homepage
+m.youtube.com##ytm-chip-cloud-chip-renderer:has(.yt-core-attributed-string:has-text(/^Shorts$/i))
+
+! Hides Shorts sections on the mobile search page
+m.youtube.com##ytm-reel-shelf-renderer:has(ytm-shorts-lockup-view-model)
+
+! -------------------------------------------------------------------------------
+! ADDITIONAL UI CLEANUP
+! -------------------------------------------------------------------------------
+
+! Removes various distracting UI elements for a cleaner layout (NOT on channel pages)
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)#contents > .ytd-secondary-search-container-renderer.style-scope
+! REMOVED: This rule hides the video grid on channel pages
+! www.youtube.com##ytd-rich-grid-renderer
+! REMOVED: This rule hides video sections on channel pages
+! www.youtube.com##ytd-rich-section-renderer
+www.youtube.com##:matches-path(/^(?!.*\/(c\/|channel\/|@)).*$/)#contents.ytd-rich-grid-renderer
+
+! Additional navigation and layout optimizations
+www.youtube.com##ytd-mini-guide-renderer.ytd-app.style-scope
+www.youtube.com###scroll-container > .yt-chip-cloud-renderer.style-scope
+www.youtube.com##ytd-item-section-renderer.ytd-watch-next-secondary-results-renderer.style-scope
+
+! === Remove endscreen elements ===
+! Removes the video suggestions shown at the end of a video
+www.youtube.com##.ytp-show-tiles.videowall-endscreen.ytp-player-content.html5-endscreen
+
+www.youtube.com##ytd-horizontal-card-list-renderer.ytd-item-section-renderer.style-scope
+www.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-shelf-renderer.style-scope
+youtube.com##.ytSearchboxComponentSuggestionsContainer:style(display: none !important)
+
+www.youtube.com###secondary
+
+www.youtube.com##.ytp-fullscreen-grid-stills-container
+www.youtube.com##ytd-watch-next-secondary-results-renderer.ytd-watch-flexy.style-scope > .ytd-watch-next-secondary-results-renderer.style-scope
