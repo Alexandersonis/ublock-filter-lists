@@ -1,0 +1,24 @@
+! https://www.hltv.org
+www.hltv.org##.col-box-con > .activitylist > a.no-promode.csCat.a-reset.activity.col-box > .a-default.topic
+
+! https://www.twitch.tv
+www.twitch.tv##.eUABfN.CoreText-sc-1txzju1-0
+www.twitch.tv##div.side-nav-section.dcyYPL.Layout-sc-1xcs6mc-0:nth-of-type(1)
+www.twitch.tv##div.side-nav-section.dcyYPL.Layout-sc-1xcs6mc-0:nth-of-type(2)
+www.twitch.tv##.side-nav__scrollable_content.simplebar-content
+
+! https://www.reddit.com
+www.reddit.com##left-nav-top-section
+reddit.com##ul[id="reddit-trending-searches-partial-container"]
+www.reddit.com##.my-2xs.py-2xs.px-md.flex-col.flex.nd\:visible
+
+! http://www.zeno.org
+www.zeno.org###zenoMFLeft
+www.zeno.org###zenoMFRight
+
+! fandom.com
+fandom.com##.global-explore-navigation__nav
+fandom.com##.global-explore-navigation__top
+
+! stackexchange.com
+unix.stackexchange.com##.tex2jax_ignore.module
